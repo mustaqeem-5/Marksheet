@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
+     <style>
+        @media print {
+
+            @page {
+                margin: 10mm;
+            }
+
+            body {
+                zoom: 0.72;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: white !important;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            .flex {
+                page-break-inside: avoid;
+            }
+
+            input {
+                border: 1px solid #000 !important;
+            }
+
+            .px-45 {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+
+            .pr-42 {
+                padding-right: 10px !important;
+            }
+
+            .pt-26 {
+                padding-top: 10px !important;
+            }
+
+            body > div:first-child {
+                display: none !important;
+            }
+
+            .hidden {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ful_form" class="p-10 bg-linear-to-br from-[#E4EEF8] to-[#cbdcf0]">
+        <div class="p-8 shadow-xl rounded-xl bg-white/70 backdrop-blur-md">
+               <!-- Form -->
+            <div class="flex justify-between">
+                <div class="pb-2">
+                    <input type="text" value="Class:" id="class1" oninput="syncData()" class="border-2 font-medium bg-[#6485A4] text-white rounded-md px-2 py-1">
+                </div>
+
+                <div class="flex pr-10 items-center gap-2">
+                    <div class="border-2 w-20 h-7 font-medium flex items-center justify-center rounded-md">Roll No:</div>
+                    <input type="text" id="rollno1" oninput="syncData()" class="border-2 w-20 h-7 font-medium text-center bg-[#6485A4] text-white rounded-md">
+                </div>
+            </div>
+
+            <div class="flex justify-between pt-4 gap-4 pb-4">
+
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-1">
+                        <div class="border-2 font-medium w-43 rounded-md px-2">Name</div>
+                        <input type="text" id="name1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
+                    </div>
+
+                    <div class="flex items-center gap-1">
+                        <div class="border-2 font-medium w-43 rounded-md px-2">F/Name</div>
+                        <input type="text" id="fname1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2 pr-10">
+                    <div class="flex items-center gap-1">
+                        <div class="border-2 font-medium w-43 rounded-md px-2">Surname</div>
+                        <input type="text" id="surname1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
+                    </div>
+
+                    <div class="flex items-center gap-1">
+                        <div class="border-2 font-medium w-43 rounded-md px-2">DOB</div>
+                        <input type="text" id="dob1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
+                    </div>
+                </div>
+            </div>
+            <!-- Form End -->
+
+            <div class="border-2 p-4 w-full rounded-xl bg-white">
+                <!-- Marksheet -->
+                <h1 class="text-3xl font-bold text-center underline text-gray-700">MarkSheet</h1>
+
+                <div id="addnewline" class="flex flex-col gap-3 pt-4">
+                
+                    <div class="flex text-lg font-bold bg-[#6485A4] text-white py-2 rounded-md">
+                        <span class="pl-6 w-1/4">Subjects</span>
+                        <span class="w-1/4">MinMarks</span>
+                        <span class="w-1/4">MaxMarks</span>
+                        <span class="w-1/4">ObtainMarks</span>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input type="text" id="sub1" oninput="syncData()" class="subject_inp border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+
+                        <input type="text" id="min1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+
+                        <input type="text" id="max1" oninput="syncData(); maxmark()" class="border-2 maxnum bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+
+                        <input type="number" id="obt1" oninput="syncData(); obtMark()" step="0.01" class="border-2 num bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+
+                        <button onclick="addline()" class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-between font-medium pt-6">
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-1">
+                            <div class="border-2 w-46.5 rounded-md px-2">Total Mark</div>
+                            <input type="text" id="totalmark1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                        </div>
+
+                        <div class="flex items-center gap-1">
+                            <div class="border-2 w-46.5 rounded-md px-2">Total</div>
+                            <input type="text" id="total1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pr-6">
+                        <div class="flex items-center gap-1">
+                            <div class="border-2 w-46.5 rounded-md px-2">Percentage</div>
+                            <input type="text" id="percentage1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                        </div>
+
+                        <div class="flex items-center gap-1">
+                            <div class="border-2 w-46.5 rounded-md px-2">Grade</div>
+                            <input type="text" id="Grade1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                        </div>
+
+                        <div class="flex items-center gap-1">
+                            <div class="border-2 w-46.5 rounded-md px-2">Remarks</div>
+                            <input type="text" id="Remarks1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                        </div>
+
+                        <button onclick="printMarksheet()" class="px-6 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white transition">
+                            Print
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="full_form2" class="hidden">
+        <div class="p-4 flex flex-col items-center ">
+
+            <div class="text-center">
+                <h1 class="text-5xl font-medium text-[#FE0100]">MODEL HIGH SCHOOL</h1>
+                <p class="font-medium">123-Highstreet Lane, Factorial City, Downtown-568965</p>
+            </div>
+
+            <div class="text-2xl font-medium text-center pt-6">Marksheet 2025-2026</div>
+
+            <div class=" pt-10">
+                <div class="flex gap-136">
+                    <div class="pb-2">
+                        <input type="text" id="class2" class="border-2 font-medium h-9 py-1 px-2">
+                    </div>
+
+                    <div class="flex pr-10">
+                        <div class="border-2 w-20 h-9 font-medium flex items-center pl-2">Roll No:</div>
+                        <input type="text" id="rollno2" class="border-2 w-20 h-9 font-medium text-center bg-[#FFFF00]">
+                    </div>
+                </div>
+
+                <div class="flex gap-57.5 pt-4 pb-4">
+                    <div class="flex flex-col">
+                        <div class="flex">
+                            <div class="border-2 font-medium w-43 px-2 bg-[#FFF2CC]">Name</div>
+                            <input type="text" id="name2" class="upper border-2 w-43 px-2">
+                        </div>
+
+                        <div class="flex">
+                            <div class="border-2 font-medium w-43 px-2 bg-[#FFF2CC]">F/Name</div>
+                            <input type="text" id="fname2" class="upper border-2 w-43 px-2">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col pr-10">
+                        <div class="flex">
+                            <div class="border-2 font-medium w-43 px-2 bg-[#FFF2CC]">Surname</div>
+                            <input type="text" id="surname2" class="upper border-2 w-43 px-2">
+                        </div>
+
+                        <div class="flex">
+                            <div class="border-2 font-medium w-43 px-2 bg-[#FFF2CC]">DOB</div>
+                            <input type="text" id="dob2" class="upper border-2 w-43 px-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-2 pb-5">
+                <table class="border-2 w-248.5">
+                    <thead>
+                        <tr class="border bg-amber-100">
+                            <th class="border">Subjects</th>
+                            <th class="border">Total Marks</th>
+                            <th class="border">Passing Marks</th>
+                            <th class="border">Marks Obtained</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="printTableBody">
+                        <tr class="border ">
+                            <td id="sub2" class="border px-4"></td>
+                            <td id="max2" class="border bg-blue-300"></td>
+                            <td id="min2" class="border"></td>
+                            <td id="obt2" class="border bg-orange-200"></td>
+                            <!-- <input type="text" id="sub2" class="border px-4">
+                        <input type="text" id="sub2" class="border px-4">
+                        <input type="text" id="sub2" class="border px-4">
+                        <input type="text" id="sub2" class="border px-4"> -->
+                        </tr>
+
+                        <!-- <tr class="border">
+                        <td id="sub2" class="border px-4">Urdu</td>
+                        <td id="max2" class="border bg-blue-300">100</td>
+                        <td id="min2" class="border">33</td>
+                        <td id="obt2" class="border bg-orange-200">80</td>
+                    </tr>
+
+                    <tr class="bordert">
+                        <td id="sub2" class="border px-4">Math</td>
+                        <td id="max2" class="border bg-blue-300">100</td>
+                        <td id="min2" class="border">33</td>
+                        <td id="obt2" class="border bg-orange-200">80</td>
+                    </tr>
+
+                    <tr class="border">
+                        <td id="sub2" class="border px-4">Science</td>
+                        <td id="max2" class="border bg-blue-300">100</td>
+                        <td id="min2" class="border">33</td>
+                        <td id="obt2" class="border bg-orange-200">80</td>
+                    </tr>
+
+                    <tr class="border">
+                        <td id="sub2" class="border px-4">Islamiyat</td>
+                        <td id="max2" class="border bg-blue-300">100</td>
+                        <td id="min2" class="border">33</td>
+                        <td id="obt2" class="border bg-orange-200">80</td>
+                    </tr> -->
+                    </tbody>
+                </table>
+
+                <div class="py-6">
+
+                    <div class="flex font-semibold justify-between">
+                        <div class="border-2 w-96.5 h-13.5">
+                            <div class="flex items-center">
+                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-b-2 px-2">Total Marks</div>
+                                <input type="text" id="totalmark2" class="w-42.5 border">
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-y-2 px-2">Total</div>
+                                <input type="text" id="total2" class="w-42.5 border border-b-2">
+                            </div>
+                        </div>
+                        <div class="pr-6">
+                            <div class="flex items-center">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC]">Percentage</div>
+                                <input type="text" id="percentage2" class="border-2">
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC] ">Grade</div>
+                                <input type="text" id="Grade2" class="border-2">
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC] ">Remarks</div>
+                                <input type="text" id="Remarks2" class="border-2">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+    
+    </div>
+
+</body>
+
+</html>
+<script>
+    let totalmark = 0;
+
+    // 🔹 Max Marks
+    function maxmark() {
+        let maxnums = document.querySelectorAll(".maxnum");
+        totalmark = 0;
+
+        for (let i = 0; i < maxnums.length; i++) {
+            totalmark += Number(maxnums[i].value) || 0;
+        }
+
+        document.getElementById("totalmark1").value = totalmark;
+    }
+
+    // 🔹 Obtained Marks
+    function obtMark() {
+        let inputs = document.querySelectorAll(".num");
+        let total = 0;
+
+        for (let i = 0; i < inputs.length; i++) {
+            total += Number(inputs[i].value) || 0;
+        }
+
+        document.getElementById("total1").value = total;
+        percentage();
+    }
+
+    // 🔹 Percentage + Grade + Remarks
+    function percentage() {
+        let total = Number(document.getElementById("total1").value) || 0;
+        let percent = 0;
+
+        if (totalmark !== 0) {
+            percent = (total / totalmark) * 100;
+        }
+
+        document.getElementById("percentage1").value = percent.toFixed(2) + "%";
+        document.getElementById("Grade1").value = grade(percent);
+
+        if (percent >= 40) {
+            document.getElementById("Remarks1").value = "Pass";
+        } else {
+            document.getElementById("Remarks1").value = "Fail";
+        }
+    }
+
+    // 🔹 Grade Logic (no ternary)
+    function grade(p) {
+        if (p >= 80) {
+            return "A";
+        } else if (p >= 70) {
+            return "B";
+        } else if (p >= 60) {
+            return "C";
+        } else if (p >= 40) {
+            return "D";
+        } else {
+            return "Fail";
+        }
+    }
+
+    // 🔹 Add Row
+    function addline() {
+        let container = document.getElementById("addnewline");
+
+        let row = document.createElement("div");
+        row.className = "flex gap-2";
+
+        row.innerHTML = `
+            <input type="text" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+            <input type="text" value="33" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+            <input type="text" value="100" oninput="maxmark()" class="border-2 maxnum bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+            <input type="number" step="0.01" oninput="obtMark()" class="border-2 num bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+            <button onclick="removeLine(this)" class="px-3 py-1 bg-red-500 text-white rounded-md">-</button>
+        `;
+
+        container.appendChild(row);
+        maxmark();
+    }
+
+    // 🔹 Remove Row
+    function removeLine(btn) {
+        btn.parentElement.remove();
+        maxmark();
+        obtMark();
+    }
+
+    // 🔹 Uppercase
+    document.addEventListener("input", function (e) {
+        if (e.target.classList.contains("upper")) {
+            e.target.value = e.target.value.toUpperCase();
+        }
+
+        if (e.target.classList.contains("num")) {
+            let value = e.target.value;
+
+            if (value.includes(".")) {
+                let parts = value.split(".");
+                parts[1] = parts[1].slice(0, 2);
+                e.target.value = parts[0] + "." + parts[1];
+            }
+        }
+    });
+
+    // 🔹 Sync Data (simple way)
+    function syncData() {
+        document.getElementById("rollno2").value = document.getElementById("rollno1").value;
+        document.getElementById("class2").value = document.getElementById("class1").value;
+        document.getElementById("name2").value = document.getElementById("name1").value;
+        document.getElementById("fname2").value = document.getElementById("fname1").value;
+        document.getElementById("surname2").value = document.getElementById("surname1").value;
+        document.getElementById("dob2").value = document.getElementById("dob1").value;
+
+        document.getElementById("totalmark2").value = document.getElementById("totalmark1").value;
+        document.getElementById("total2").value = document.getElementById("total1").value;
+        document.getElementById("percentage2").value = document.getElementById("percentage1").value;
+        document.getElementById("Grade2").value = document.getElementById("Grade1").value;
+        document.getElementById("Remarks2").value = document.getElementById("Remarks1").value;
+
+        document.getElementById("sub2").innerText = document.getElementById("sub1").value;
+        document.getElementById("min2").innerText = document.getElementById("min1").value;
+        document.getElementById("max2").innerText = document.getElementById("max1").value;
+        document.getElementById("obt2").innerText = document.getElementById("obt1").value;
+    }
+
+    // 🔹 Generate Table
+    function generatePrintTable() {
+        let rows = document.querySelectorAll("#addnewline .flex.gap-2");
+        let tbody = document.getElementById("printTableBody");
+
+        tbody.innerHTML = "";
+
+        for (let i = 0; i < rows.length; i++) {
+            let inputs = rows[i].querySelectorAll("input");
+
+            let sub = inputs[0].value;
+            let min = inputs[1].value;
+            let max = inputs[2].value;
+            let obt = inputs[3].value;
+
+            let tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td class="border px-4">${sub}</td>
+                <td class="border bg-blue-300">${max}</td>
+                <td class="border">${min}</td>
+                <td class="border bg-orange-200">${obt}</td>
+            `;
+
+            tbody.appendChild(tr);
+        }
+    }
+
+    // 🔹 Print
+    function printMarksheet() {
+        syncData();
+        generatePrintTable();
+
+        document.getElementById("ful_form").classList.add("hidden");
+        document.getElementById("full_form2").classList.remove("hidden");
+
+        setTimeout(function () {
+            window.print();
+        }, 300);
+    }
+
+    // 🔹 Reset on Load
+    window.addEventListener("pageshow", function () {
+        document.getElementById("ful_form").classList.remove("hidden");
+        document.getElementById("full_form2").classList.add("hidden");
+        maxmark();
+    });
+</script>
+
