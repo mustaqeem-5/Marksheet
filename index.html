@@ -51,14 +51,17 @@
                 padding-top: 10px !important;
             }
 
-            body > div:first-child {
-                display: none !important;
-            }
-
-            .hidden {
-                display: block !important;
-            }
+            
         }
+        @media print {
+    #ful_form {
+        display: none;
+    }
+
+    #full_form2 {
+        display: block;
+    }
+}
     </style>
 </head>
 
@@ -69,12 +72,12 @@
                <!-- Form -->
             <div class="flex justify-between">
                 <div class="pb-2">
-                    <input type="text" value="Class:" id="class1" oninput="syncData()" class="border-2 font-medium bg-[#6485A4] text-white rounded-md px-2 py-1">
+                    <input type="text" value="CLASS :   " id="class1" oninput="syncData()" class="upper border-2 font-medium bg-[#6485A4] text-white rounded-md px-2 py-1">
                 </div>
 
                 <div class="flex pr-10 items-center gap-2">
                     <div class="border-2 w-20 h-7 font-medium flex items-center justify-center rounded-md">Roll No:</div>
-                    <input type="text" id="rollno1" oninput="syncData()" class="border-2 w-20 h-7 font-medium text-center bg-[#6485A4] text-white rounded-md">
+                    <input type="text" id="rollno1" oninput="syncData()" class="border-2 w-20 h-7 px-2 font-medium text-center bg-[#6485A4] text-white rounded-md">
                 </div>
             </div>
 
@@ -100,7 +103,7 @@
 
                     <div class="flex items-center gap-1">
                         <div class="border-2 font-medium w-43 rounded-md px-2">DOB</div>
-                        <input type="text" id="dob1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
+                        <input type="date" id="dob1" oninput="syncData()" class="upper border-2 w-43 bg-[#6485A4] text-white rounded-md px-2 py-1">
                     </div>
                 </div>
             </div>
@@ -120,13 +123,13 @@
                     </div>
 
                     <div class="flex gap-2">
-                        <input type="text" id="sub1" oninput="syncData()" class="subject_inp border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+                        <input type="text" id="sub1" oninput="syncData()" class="upper subject_inp border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
 
                         <input type="text" id="min1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
 
                         <input type="text" id="max1" oninput="syncData(); maxmark()" class="border-2 maxnum bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
 
-                        <input type="number" id="obt1" oninput="syncData(); obtMark()" step="0.01" class="border-2 num bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+                        <input type="number" id="obt1" class="num border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4" oninput="syncData(); obtMark()" step="0.01">
 
                         <button onclick="addline()" class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md transition">
                             <i class="fa-solid fa-plus"></i>
@@ -140,29 +143,29 @@
                     <div class="space-y-2">
                         <div class="flex items-center gap-1">
                             <div class="border-2 w-46.5 rounded-md px-2">Total Mark</div>
-                            <input type="text" id="totalmark1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                            <input type="text" id="totalmark1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2" readonly>
                         </div>
 
                         <div class="flex items-center gap-1">
                             <div class="border-2 w-46.5 rounded-md px-2">Total</div>
-                            <input type="text" id="total1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                            <input type="text" id="total1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2" readonly>
                         </div>
                     </div>
 
                     <div class="space-y-2 pr-6">
                         <div class="flex items-center gap-1">
                             <div class="border-2 w-46.5 rounded-md px-2">Percentage</div>
-                            <input type="text" id="percentage1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                            <input type="text" id="percentage1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2" readonly>
                         </div>
 
                         <div class="flex items-center gap-1">
                             <div class="border-2 w-46.5 rounded-md px-2">Grade</div>
-                            <input type="text" id="Grade1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                            <input type="text" id="Grade1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2" readonly>
                         </div>
 
                         <div class="flex items-center gap-1">
                             <div class="border-2 w-46.5 rounded-md px-2">Remarks</div>
-                            <input type="text" id="Remarks1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2">
+                            <input type="text" id="Remarks1" oninput="syncData()" class="border-2 bg-[#6485A4] text-white rounded-md px-2" readonly>
                         </div>
 
                         <button onclick="printMarksheet()" class="px-6 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white transition">
@@ -187,7 +190,7 @@
             <div class="text-2xl font-medium text-center pt-6">Marksheet 2025-2026</div>
 
             <div class=" pt-10">
-                <div class="flex gap-136">
+                <div class="flex gap-145">
                     <div class="pb-2">
                         <input type="text" id="class2" class="border-2 font-medium h-9 py-1 px-2">
                     </div>
@@ -198,7 +201,7 @@
                     </div>
                 </div>
 
-                <div class="flex gap-57.5 pt-4 pb-4">
+                <div class="flex gap-66.5 pt-4 pb-4">
                     <div class="flex flex-col">
                         <div class="flex">
                             <div class="border-2 font-medium w-43 px-2 bg-[#FFF2CC]">Name</div>
@@ -239,42 +242,10 @@
                     <tbody id="printTableBody">
                         <tr class="border ">
                             <td id="sub2" class="border px-4"></td>
-                            <td id="max2" class="border bg-blue-300"></td>
-                            <td id="min2" class="border"></td>
-                            <td id="obt2" class="border bg-orange-200"></td>
-                            <!-- <input type="text" id="sub2" class="border px-4">
-                        <input type="text" id="sub2" class="border px-4">
-                        <input type="text" id="sub2" class="border px-4">
-                        <input type="text" id="sub2" class="border px-4"> -->
+                            <td id="max2" class="border bg-blue-300 px-4"></td>
+                            <td id="min2" class="border px-4"></td>
+                            <td id="obt2" class="border bg-orange-200 px-4"></td>
                         </tr>
-
-                        <!-- <tr class="border">
-                        <td id="sub2" class="border px-4">Urdu</td>
-                        <td id="max2" class="border bg-blue-300">100</td>
-                        <td id="min2" class="border">33</td>
-                        <td id="obt2" class="border bg-orange-200">80</td>
-                    </tr>
-
-                    <tr class="bordert">
-                        <td id="sub2" class="border px-4">Math</td>
-                        <td id="max2" class="border bg-blue-300">100</td>
-                        <td id="min2" class="border">33</td>
-                        <td id="obt2" class="border bg-orange-200">80</td>
-                    </tr>
-
-                    <tr class="border">
-                        <td id="sub2" class="border px-4">Science</td>
-                        <td id="max2" class="border bg-blue-300">100</td>
-                        <td id="min2" class="border">33</td>
-                        <td id="obt2" class="border bg-orange-200">80</td>
-                    </tr>
-
-                    <tr class="border">
-                        <td id="sub2" class="border px-4">Islamiyat</td>
-                        <td id="max2" class="border bg-blue-300">100</td>
-                        <td id="min2" class="border">33</td>
-                        <td id="obt2" class="border bg-orange-200">80</td>
-                    </tr> -->
                     </tbody>
                 </table>
 
@@ -283,29 +254,29 @@
                     <div class="flex font-semibold justify-between">
                         <div class="border-2 w-96.5 h-13.5">
                             <div class="flex items-center">
-                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-b-2 px-2">Total Marks</div>
-                                <input type="text" id="totalmark2" class="w-42.5 border">
+                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-b-2 px-2 h-6.5">Total Marks</div>
+                                <input type="text" id="totalmark2" class="w-42.5 border h-6.5 pl-2">
                             </div>
 
                             <div class="flex items-center">
-                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-y-2 px-2">Total</div>
-                                <input type="text" id="total2" class="w-42.5 border border-b-2">
+                                <div class="w-61.5 bg-[#FFF2CC] border-r-2 border-y-2 px-2 h-6.5">Total</div>
+                                <input type="text" id="total2" class="w-42.5 border border-b-2 h-6.5 pl-2">
                             </div>
                         </div>
                         <div class="pr-6">
                             <div class="flex items-center">
-                                <div class="border-2 w-61.5 bg-[#FFF2CC]">Percentage</div>
-                                <input type="text" id="percentage2" class="border-2">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC] pl-2">Percentage</div>
+                                <input type="text" id="percentage2" class="border-2 pl-2">
                             </div>
 
                             <div class="flex items-center">
-                                <div class="border-2 w-61.5 bg-[#FFF2CC] ">Grade</div>
-                                <input type="text" id="Grade2" class="border-2">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC] pl-2 ">Grade</div>
+                                <input type="text" id="Grade2" class="border-2 pl-2">
                             </div>
 
                             <div class="flex items-center">
-                                <div class="border-2 w-61.5 bg-[#FFF2CC] ">Remarks</div>
-                                <input type="text" id="Remarks2" class="border-2">
+                                <div class="border-2 w-61.5 bg-[#FFF2CC] pl-2 ">Remarks</div>
+                                <input type="text" id="Remarks2" class="border-2 pl-2">
                             </div>
 
                         </div>
@@ -390,11 +361,11 @@
         row.className = "flex gap-2";
 
         row.innerHTML = `
+            <input type="text" class="upper border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
             <input type="text" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
-            <input type="text" value="33" class="border-2 bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
-            <input type="text" value="100" oninput="maxmark()" class="border-2 maxnum bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
+            <input type="text" oninput="maxmark()" class="border-2 maxnum bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
             <input type="number" step="0.01" oninput="obtMark()" class="border-2 num bg-[#6485A4] text-white rounded-md px-2 py-1 w-1/4">
-            <button onclick="removeLine(this)" class="px-3 py-1 bg-red-500 text-white rounded-md">-</button>
+            <button onclick="removeLine(this)" class="px-4.5 py-1 bg-red-500 text-white rounded-md">-</button>
         `;
 
         container.appendChild(row);
@@ -478,8 +449,8 @@
         syncData();
         generatePrintTable();
 
-        document.getElementById("ful_form").classList.add("hidden");
-        document.getElementById("full_form2").classList.remove("hidden");
+        // document.getElementById("ful_form").classList.add("hidden");
+        // document.getElementById("full_form2").classList.remove("hidden");
 
         setTimeout(function () {
             window.print();
@@ -488,8 +459,8 @@
 
     // 🔹 Reset on Load
     window.addEventListener("pageshow", function () {
-        document.getElementById("ful_form").classList.remove("hidden");
-        document.getElementById("full_form2").classList.add("hidden");
+        // document.getElementById("ful_form").classList.remove("hidden");
+        // document.getElementById("full_form2").classList.add("hidden");
         maxmark();
     });
 </script>
